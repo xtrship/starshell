@@ -1,4 +1,4 @@
-// main c file
+/ main c file 
 #include "star.h"
 
 
@@ -12,12 +12,17 @@ char 	*star_read_line(void
 	
 	if (getline(&buf, &bufsize, stdin) == -1)
 	{
+		buf = NULL;
+
 		if (feof(stdin))
-		    printf("[EOF]");
+		    p(RED"[EOF]"RST);
 		else 
-		    printf("GETLINE FAILED!");
+		    p(RED"GETLINE FAILED!"RST);
+
+		p("%s/n", buf);
 	}
 
+	return buf;
 }
 
 
@@ -31,7 +36,10 @@ int main(int ac, char **av)
 	{
 	//1) GET LINE
 	line = star_read_line(); 
-	
+	p("%s/n", line);
+	pause();
+
+
 	//2) GET TOKENS 
 	
 	//3) EXEC
