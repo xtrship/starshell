@@ -22,5 +22,7 @@
 #define RED		"\033[1;31m"
 #define RST 		"\033[0m"
 
+#define p(...) 		printf(__VA_ARGS_)
+
 #endif
 
