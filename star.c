@@ -1,47 +1,52 @@
 #include "star.h"
 
-
-char 	*star_read_line(void)
+char *star_read_line(void)
 {
+    char *buf = NULL;
+    size_t bufsize = 0;
 
-	char 	*buf;
-	size_t	bufsize;
+    if (getline(&buf, &bufsize, stdin) == -1)
+    {
+        if (feof(stdin))
+        {
+            p(RED "[EOF]" RST "\n");
+        }
+        else
+        {
+            p(RED "GETLINE FAILED!" RST "\n");
+        }
+        free(buf); // Free the buffer in case of error
+        return NULL;
+    }
 
-	buf = NULL; // getline will take care of this 
-	
-	if (getline(&buf, &bufsize, stdin) == -1)
-	{
-		if (feof(stdin))
-		    p(RED"[EOF]"RST);
-		else 
-		    p(RED"GETLINE FAILED!"RST);
-
-		p("%s\n", buf);
-	}
-
-	return buf;
+    return buf;
 }
 
-
-int main(int ac, char **av)
+int main(void)
 {
+    char *line;
 
-	char 	*line;
+    while (1)
+    {
+        // 1) Get line
+        p(Y "Enter command: " RST);
+        line = star_read_line();
 
+        if (line == NULL)
+        {
+            break; // Exit on EOF or error
+        }
 
-	while (0xCE77)
-	{
-	//1) GET LINE
-	line = star_read_line(); 
-	p("%s\n", line);
-	pause();
+        // 2) Print the line
+        p(G "You entered: " RST "%s", line);
 
+        // 3) Free the allocated memory
+        free(line);
 
-	//2) GET TOKENS 
-	
-	//3) GET TOKENS
-	
-	}
+        // 4) Get tokens (to be implemented)
+        // tokenize(line);
+    }
 
-	return EXIT_SUCCESS;
+    p(C "Exiting shell..." RST "\n");
+    return EXIT_SUCCESS;
 }
