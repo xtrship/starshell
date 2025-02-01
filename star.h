@@ -1,4 +1,3 @@
-`// star.h
 #ifndef STAR_H
 #define STAR_H
 
@@ -22,7 +21,7 @@
 #define RED		"\033[1;31m"
 #define RST 		"\033[0m"
 
-#define p(...) 		printf(__VA_ARGS_)
+#define p(...) 		printf(__VA_ARGS__)
 
 #endif
 
